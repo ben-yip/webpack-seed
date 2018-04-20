@@ -84,7 +84,10 @@ module.exports = {
     },
 
     plugins: [
+        // 每次构建前先清理输出目录
         new CleanWebpackPlugin(['dist']),
+
+        // 动态生成 HTML 文件，自动引用所需资源
         new HtmlWebpackPlugin({
             // title: 'Output management',
             template: './index.html',
