@@ -1,34 +1,41 @@
-import '../css/style.css';
-import '../css/foobar.css';
+/**
+ * babel-loader 测试
+ */
+import './babel.test';
 
-import myImage from '../img/not-found.png';
+/**
+ * 其他文件加载测试
+ */
+import './import-image.test';
+import './import-xml.test'
 
-import Data from '../data/data.xml';
+/**
+ * 共用代码提取测试 （CommonsChunkPlugin）
+ */
+import './common.test';
 
-import './111';
-import './222';
+/**
+ * todo vendor 独立抽取测试
+ */
+// import './vendor-1.test';
+// import './vendor-2.test';
 
-import printMe from './print.js';
 
-function component() {
-    let ele = document.createElement('DIV');
+/**
+ * 样式表处理测试
+ */
+import '../style/main.css';
+import '../style/other.css';
+import '../style/sass.test.scss';
+import '../style/image-compress.test.css'
 
-    let img = new Image();
-    img.src = myImage;
-    img.width = 200;
-
-    ele.appendChild(img);
-
-    return ele;
-}
-
-document.body.appendChild(component());
-
-console.log(Data);
-
-if (module.hot) {
-    module.hot.accept('./print.js', function () {
-        console.log('Accepting the updated printMe module!');
-        printMe();
-    })
-}
+/**
+ * HMR test
+ */
+// import printMe from './print';
+// if (module.hot) {
+//     module.hot.accept('./print.js', function () {
+//         console.log('Accepting the updated printMe module!');
+//         printMe();
+//     });
+// }

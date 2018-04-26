@@ -1,0 +1,10 @@
+.title {
+    font-size: 100px;
+}
+
+.logo {
+    width:  200px;
+    height: 200px;
+    background: url("../img/webpack.png") no-repeat center;
+    background-size: contain;
+}

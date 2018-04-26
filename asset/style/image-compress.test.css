@@ -1,0 +1,12 @@
+
+.jpeg-test {
+    background-image: url("../img/image-compress-test.jpg");
+}
+
+.png-test {
+    background-image: url("../img/image-compress-test.png");
+}
+
+.gif-test {
+    background-image: url("../img/image-compress-test.gif");
+}

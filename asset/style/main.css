@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: 'myFont';
+    src: url("../font/TrajanPro-Regular.otf") format("opentype");
+}
+
+html, body {
+    font-family: myFont, sans-serif;
+}
+
+body {
+    color: steelblue;
+    background: lightgoldenrodyellow;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+/*=========================================*/
+
+.small-image {
+    height: 50px;
+    width: 50px;
+    background: url("../img/number.5KB.png") no-repeat center;
+    background-size: contain;
+}
