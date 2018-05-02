@@ -32,7 +32,7 @@ module.exports = {
 
         // 表示如何命名生成出来的入口文件
         //
-        filename: '[name].bundle.[hash].js',
+        filename: '[name].bundle.[chunkhash].js',
     },
 
     /**
