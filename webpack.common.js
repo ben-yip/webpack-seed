@@ -6,16 +6,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     /**
      * https://webpack.js.org/configuration/entry-context/
-     *
      */
     context: path.resolve(__dirname),
     entry: {
-        main: './asset/js/index.js',
-        other: './asset/js/another.js',
-        // vendor: [
-        //     './asset/js/vendor-1.test.js',
-        //     './asset/js/vendor-2.test.js',
-        // ],
+        main: './asset/js/main.js',
+        another: './asset/js/another.js',
+        vendor: [
+            /* here goes 3-party modules, like lodash or react.*/
+            './asset/js/vendor-1.test.js',
+            './asset/js/vendor-2.test.js',
+        ],
     },
 
     /**
@@ -71,18 +71,25 @@ module.exports = {
         // 每次构建前先清理输出目录
         new CleanWebpackPlugin(['dist']),
 
-        // 代码去重，提取为共用块
+        /**
+         * https://webpack.js.org/plugins/commons-chunk-plugin
+         */
         new webpack.optimize.CommonsChunkPlugin({
-            // 共用 bundle 的 name
-            names: [
-                // 'vendor',  // 对应 entry 中的 vendor，显式地
-                'common',
-            ],
-            // filename: 'vendor.js' // 也可以另起文件名
-            // minChunks: Infinity,
+            name: 'vendor',       // 对应 entry 中的 vendor，显式指定
+            minChunks: Infinity,  // ensures that no other module goes into the vendor chunk
+            // ↑若不指定，那么如果全部入口点之间有共用块的话，也会被合并到 vendor 中。
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'manifest',     // 这个在 entry 中没有，用来提取一份 webpack 的 boilerplate 和 manifest
+            minChunks: Infinity,  // 默认是 entry 的数量
+            // 因为入口点没有本文件，所以文件名不能使用[chunkhash]，因此这里要显式定义以覆盖 output 中的设置
+            filename: 'manifest.[hash].js',
         }),
 
-        // 动态生成 HTML 文件，自动引用所需资源
+        /**
+         * https://github.com/jantimon/html-webpack-plugin
+         * 动态生成 HTML 文件，自动引用所需资源
+         */
         new HtmlWebpackPlugin({
             template: 'pages/index.html',
             // title: 'Output management', // 指定了 template 的话会被忽略

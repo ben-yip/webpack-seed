@@ -10,15 +10,10 @@ import './import-image.test';
 import './import-xml.test'
 
 /**
- * 共用代码提取测试 （CommonsChunkPlugin）
+ * CommonsChunkPlugin 抽取测试
  */
-import './common.test';
-
-/**
- * todo vendor 独立抽取测试
- */
-// import './vendor-1.test';
-// import './vendor-2.test';
+import './vendor-1.test';
+import './vendor-2.test';
 
 
 /**
