@@ -56,6 +56,7 @@ module.exports = merge(commonConfig, {
                             limit: 1024 * 10,  // Byte limit to inline files as Data URL
                         }
                     },
+                    // NOTE: compression is a little time-consuming.
                     {
                         loader: 'image-webpack-loader',
                         options: {
