@@ -65,7 +65,11 @@ module.exports = merge(commonConfig, {
     plugins: [
         // 启用模块热替换(Hot Module Replacement)
         new webpack.HotModuleReplacementPlugin(),
-        // 当开启 HMR 的时候使用该插件会显示模块的相对路径，建议用于开发环境。
+
+        /**
+         * https://webpack.js.org/plugins/named-modules-plugin/、
+         * 当开启 HMR 的时候使用该插件会显示模块的相对路径，建议用于开发环境。
+         */
         new webpack.NamedModulesPlugin(),
     ]
 });
