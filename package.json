@@ -33,6 +33,7 @@
     "webpack": "^3.11.0",
     "webpack-dev-server": "^2.11.2",
     "webpack-merge": "^4.1.2",
+    "webpack-visualizer-plugin": "^0.1.11",
     "xml-loader": "^1.2.1"
   }
 }
