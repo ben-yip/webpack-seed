@@ -104,7 +104,7 @@ module.exports = merge(commonConfig, {
         new webpack.HashedModuleIdsPlugin(),
 
         /**
-         * https://github.com/chrisbateman/webpack-visualizer#plugin-usage
+         * https://github.com/chrisbateman/webpack-visualizer
          * 打包分析，会在output目录输出一个HTML文件。不需要时就注释掉。
          */
         // new require('webpack-visualizer-plugin')({filename: './statistics.html'}),
