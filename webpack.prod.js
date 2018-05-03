@@ -92,7 +92,12 @@ module.exports = merge(commonConfig, {
         }),
 
         /* webpack 自带的 UglifyJs 插件 */
-        new webpack.optimize.UglifyJsPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false,
+                drop_console: true,
+            }
+        }),
 
         /* 把 CSS 提取为单独的样式文件 */
         new ExtractTextPlugin('styles.css'),
