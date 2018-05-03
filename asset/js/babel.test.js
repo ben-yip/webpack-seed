@@ -13,7 +13,7 @@ let b = 2;
 [a, b] = [b, a];
 
 console.group('babel test');
-log('something');
+log('Msg output via a arrow function.');
 console.log(a);
 console.log(b);
 console.groupEnd();
