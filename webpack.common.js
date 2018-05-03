@@ -30,10 +30,9 @@ module.exports = {
         // 表示的是一个URL路径
         // 可以是一个相对路径，如示例中的'../../build/'，
         // 也可以是一个绝对路径如http://www.xxxx.com/
-        // publicPath: "/"
+        // publicPath: "http://www.xxxx.com/",
 
         // 表示如何命名生成出来的入口文件
-        //
         filename: '[name].bundle.[chunkhash].js',
     },
 
