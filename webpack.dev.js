@@ -42,18 +42,40 @@ module.exports = merge(commonConfig, {
     },
 
     /**
+     * This set of options is picked up by webpack-dev-server
+     * and can be used to change its behavior in various ways.
+     *
      * https://webpack.js.org/configuration/dev-server/
      */
     devServer: {
-        contentBase: path.join(__dirname, "dist"),
+        contentBase: path.join(__dirname, "dist"), // Tell the server where to serve content from.
+
+        /* Tell the server to watch the files served by the devServer.contentBase option.
+         * File changes will trigger a full page reload.
+         */
         // watchContentBase: true,
+
         compress: true,    // enable gzip for all resources
         hot: true,         // enable HMR feature
         open: true,        // open with default browser
         useLocalIp: true,  // open with local ip
         host: '0.0.0.0',   // enable external access
-        port: 3000,
-        // stats: 'errors-only', // 控制要显示的 bundle 信息
+        port: 3000,        // Specify a port number to listen for requests on
+        // index: 'index.html',          // The filename that is considered the index file.
+        // openPage: '/different/page',  // Specify a page to navigate to when opening the browser.
+
+        /*  Proxying some URLs can be useful when you have a separate API backend development server
+         *  and you want to send API requests on the same domain.
+         */
+        // proxy: {
+        //     "/api": "http://localhost:8080"
+        // },
+
+        /* This option lets you precisely control what bundle information gets displayed.
+         * This can be a nice middle ground if you want some bundle information, but not all of it.
+         * https://webpack.js.org/configuration/stats/
+         */
+        // stats: 'errors-only',
     },
 
     /**
