@@ -4,6 +4,11 @@
 import './babel.test';
 
 /**
+ * shimming globals
+ */
+import './shimming.test';
+
+/**
  * 其他文件加载测试
  */
 import './import-image.test';
@@ -14,7 +19,6 @@ import './import-xml.test'
  */
 import './vendor-1.test';
 import './vendor-2.test';
-
 
 /**
  * 样式表处理测试

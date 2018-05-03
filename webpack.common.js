@@ -15,6 +15,8 @@ module.exports = {
             /* here goes 3-party modules, like lodash or react.*/
             './asset/js/vendor-1.test.js',
             './asset/js/vendor-2.test.js',
+            'jquery',
+            'lodash',
         ],
     },
 
@@ -68,7 +70,25 @@ module.exports = {
      * https://webpack.js.org/configuration/plugins/
      */
     plugins: [
-        // 每次构建前先清理输出目录
+        /**
+         * Shimming globals
+         *
+         * https://webpack.js.org/guides/shimming/
+         * https://webpack.js.org/plugins/provide-plugin/
+         */
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            // _: 'lodash', // no need for lodash, _ is available by default as long as it's configured in entry.
+            // _join: ['lodash', 'join'],  // granular shimming is also available though.
+        }),
+
+        /**
+         * Clean the output directory before every build.
+         *
+         * https://webpack.js.org/guides/output-management/#cleaning-up-the-dist-folder
+         * https://www.npmjs.com/package/clean-webpack-plugin
+         */
         new CleanWebpackPlugin(['dist']),
 
         /**
