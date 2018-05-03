@@ -3,8 +3,14 @@ const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+/**
+ * https://webpack.js.org/configuration/
+ */
 module.exports = {
     /**
+     * The entry object is where webpack looks to start building the bundle.
+     * The context is an absolute string to the directory that contains the entry files.
+     *
      * https://webpack.js.org/configuration/entry-context/
      */
     context: path.resolve(__dirname),
@@ -21,25 +27,41 @@ module.exports = {
     },
 
     /**
+     * Instructing webpack on how and where it should output your bundles,
+     * assets and anything else you bundle or load with webpack.
+     *
      * https://webpack.js.org/configuration/output/
      */
     output: {
-        // 生成文件的根目录，需要传入一个绝对路径
+        // the target directory for all output files
+        // must be an absolute path (use the Node.js path module)
         path: path.join(__dirname, 'dist'),
 
-        // 表示的是一个URL路径
-        // 可以是一个相对路径，如示例中的'../../build/'，
-        // 也可以是一个绝对路径如http://www.xxxx.com/
-        // publicPath: "http://www.xxxx.com/",
+        // the url to the output directory resolved relative to the HTML page
+        // 可以是一个相对路径，如示例中的'/assets/'，
+        // publicPath: "http://cdn.example.com/",
 
-        // 表示如何命名生成出来的入口文件
+        // the filename template for entry chunks
         filename: '[name].bundle.[chunkhash].js',
     },
 
     /**
+     * These options determine how the different types of modules within a project will be treated.
+     *
      * https://webpack.js.org/configuration/module/
      */
     module: {
+        /**
+         * Prevent webpack from parsing any files matching the given regular expression(s).
+         * This can boost build performance when ignoring large libraries.
+         */
+        noParse: /jquery|lodash/,
+
+        /**
+         * An array of Rules which are matched to requests when modules are created.
+         * These rules can modify how the module is created.
+         * They can apply loaders to the module, or modify the parser.
+         */
         rules: [
             {
                 test: /\.js$/,
@@ -66,6 +88,9 @@ module.exports = {
     },
 
     /**
+     * Used to customize the webpack build process in a variety of ways.
+     * webpack comes with a variety built-in plugins available under webpack.[plugin-name]
+     *
      * https://webpack.js.org/configuration/plugins/
      */
     plugins: [
@@ -78,7 +103,7 @@ module.exports = {
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
-            // _: 'lodash', // no need for lodash, _ is available by default as long as it's configured in entry.
+            _: 'lodash',
             // _join: ['lodash', 'join'],  // granular shimming is also available though.
         }),
 
