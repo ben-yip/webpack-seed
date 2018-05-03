@@ -57,10 +57,12 @@ module.exports = merge(commonConfig, {
     },
 
     /**
+     * How source maps are generated.
+     *
      * https://webpack.js.org/configuration/devtool/
-     * 指定 source map 的生成方式
+     * https://webpack.js.org/guides/build-performance/#devtool
      */
-    devtool: "inline-source-map",
+    devtool: "cheap-module-eval-source-map",
 
     plugins: [
         // 启用模块热替换(Hot Module Replacement)
