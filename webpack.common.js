@@ -17,7 +17,7 @@ module.exports = {
      */
     context: path.resolve(__dirname),
     entry: {
-        main: './asset/js/main.js',
+        index: './asset/js/index.js',
         another: './asset/js/another.js',
         vendor: [
             /* here goes 3-party modules, like lodash or react.*/
@@ -165,7 +165,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.join(pagePath, 'index.html'),
             filename: 'index.html',
-            chunks: ['manifest', 'vendor', 'main', 'another']
+            chunks: ['manifest', 'vendor', 'index', 'another']
         }),
 
         new HtmlWebpackPlugin({
