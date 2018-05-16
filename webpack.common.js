@@ -26,7 +26,15 @@ module.exports = {
             'jquery',
             'lodash',
         ],
-        page2: './pages/page2/page2.js'
+        page2: './pages/page2/page2.js',
+
+        /*
+         * Serve as a base style shared among pages.
+         * It's extracted later via CommonsChunkPlugin,
+         * then no need to import this in every page's entry,
+         * even if imported, it would NOT be included (shown up duplicated) but only exists in a single file.
+         */
+        commonStyle: './asset/style/common.scss',
     },
 
     /**
@@ -145,10 +153,16 @@ module.exports = {
         /**
          * https://webpack.js.org/plugins/commons-chunk-plugin
          */
+        // new webpack.optimize.CommonsChunkPlugin({
+        //     name: 'vendor',       // 对应 entry 中的 vendor，显式指定
+        //     minChunks: Infinity,  // ensures that no other module goes into the vendor chunk
+        //     // ↑若不指定，那么如果全部入口点之间有共用块的话，也会被合并到 vendor 中。
+        // }),
+
         new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',       // 对应 entry 中的 vendor，显式指定
+            names: ['vendor', 'commonStyle'],       // 对应 entry 中的 vendor 和 commonStyle，都是显式指定
             minChunks: Infinity,  // ensures that no other module goes into the vendor chunk
-            // ↑若不指定，那么如果全部入口点之间有共用块的话，也会被合并到 vendor 中。
+            // ↑若不指定，那么如果全部入口点之间有共用块的话，也会被合并到其中。
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'manifest',     // 这个在 entry 中没有，用来提取一份 webpack 的 boilerplate 和 manifest
@@ -165,13 +179,13 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.join(pagePath, 'index.html'),
             filename: 'index.html',
-            chunks: ['manifest', 'vendor', 'index', 'another']
+            chunks: ['manifest', 'vendor', 'commonStyle', 'index', 'another']
         }),
 
         new HtmlWebpackPlugin({
             template: path.join(pagePath, 'page2/page2.ejs'),
             filename: 'page2.html',
-            chunks: ['manifest', 'vendor', 'page2']
+            chunks: ['manifest', 'vendor', 'commonStyle', 'page2']
         }),
     ]
 };
