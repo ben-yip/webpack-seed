@@ -3,6 +3,8 @@ const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+let pagePath = path.join(__dirname, 'pages');
+
 /**
  * https://webpack.js.org/configuration/
  */
@@ -24,6 +26,7 @@ module.exports = {
             'jquery',
             'lodash',
         ],
+        page2: './pages/page2/page2.js'
     },
 
     /**
@@ -71,6 +74,21 @@ module.exports = {
             {
                 test: /\.html$/,
                 loader: 'html-loader'
+            },
+            /**
+             * Support EJS template engine,
+             * which makes html fragment sharing possible.
+             *
+             * https://github.com/bazilio91/ejs-compiled-loader
+             * https://github.com/peerigon/extract-loader
+             */
+            {
+                test: /\.ejs$/,
+                use: [
+                    'extract-loader',
+                    'html-loader',
+                    'ejs-compiled-loader',
+                ]
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
@@ -135,10 +153,15 @@ module.exports = {
          * 动态生成 HTML 文件，自动引用所需资源
          */
         new HtmlWebpackPlugin({
-            template: 'pages/index.html',
-            // title: 'Output management', // 指定了 template 的话会被忽略
-            // hash: true,
-            // minify: true,
+            template: path.join(pagePath, 'index.html'),
+            filename: 'index.html',
+            chunks: ['manifest', 'vendor', 'main', 'another']
+        }),
+
+        new HtmlWebpackPlugin({
+            template: path.join(pagePath, 'page2/page2.ejs'),
+            filename: 'page2.html',
+            chunks: ['manifest', 'vendor', 'page2']
         }),
     ]
 };

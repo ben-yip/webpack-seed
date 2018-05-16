@@ -100,7 +100,9 @@ module.exports = merge(commonConfig, {
         }),
 
         /* 把 CSS 提取为单独的样式文件 */
-        new ExtractTextPlugin('styles.css'),
+        new ExtractTextPlugin({
+            filename: '[name].[contenthash].css'
+        }),
 
         /**
          * https://webpack.js.org/plugins/hashed-module-ids-plugin/
