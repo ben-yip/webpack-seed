@@ -49,6 +49,11 @@ module.exports = merge(commonConfig, {
             {
                 test: /\.(png|svg|jpg|gif)$/,
                 use: [
+                    /**
+                     * Loads image files as `base64` encoded URL.
+                     *
+                     * https://github.com/webpack-contrib/url-loader
+                     */
                     {
                         loader: 'url-loader',
                         options: {
@@ -56,7 +61,12 @@ module.exports = merge(commonConfig, {
                             limit: 1024 * 10,  // Byte limit to inline files as Data URL
                         }
                     },
-                    // NOTE: compression is a little time-consuming.
+                    /**
+                     * Minify PNG, JPEG, GIF, SVG and WEBP images with imagemin
+                     * NOTE: compression is a little time-consuming.
+                     *
+                     * https://github.com/tcoopman/image-webpack-loader
+                     */
                     {
                         loader: 'image-webpack-loader',
                         options: {
@@ -99,7 +109,15 @@ module.exports = merge(commonConfig, {
             }
         }),
 
-        /* 把 CSS 提取为单独的样式文件 */
+        /**
+         * moves all the required *.css modules in entry chunks into a separate CSS file.
+         * So your styles are no longer inlined into the JS bundle, but in a separate CSS file
+         *
+         * ExtractTextPlugin generates a file per entry,
+         * so you must use [name], [id] or [contenthash] when using multiple entries.
+         *
+         * https://github.com/webpack-contrib/extract-text-webpack-plugin
+         */
         new ExtractTextPlugin({
             filename: '[name].[contenthash].css'
         }),

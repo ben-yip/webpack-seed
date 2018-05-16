@@ -66,11 +66,20 @@ module.exports = {
          * They can apply loaders to the module, or modify the parser.
          */
         rules: [
+            /**
+             * https://github.com/babel/babel-loader
+             */
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader'
             },
+            /**
+             * Exports HTML as string.
+             * <img>'s src is also resolved.
+             *
+             * https://github.com/webpack-contrib/html-loader
+             */
             {
                 test: /\.html$/,
                 loader: 'html-loader'
@@ -122,7 +131,7 @@ module.exports = {
             $: 'jquery',
             jQuery: 'jquery',
             _: 'lodash',
-            // _join: ['lodash', 'join'],  // granular shimming is also available though.
+            // _join: ['lodash', 'join'],  // granular shimming is also available.
         }),
 
         /**
@@ -149,8 +158,9 @@ module.exports = {
         }),
 
         /**
+         * Simplifies creation of HTML files to serve your bundles
+         *
          * https://github.com/jantimon/html-webpack-plugin
-         * 动态生成 HTML 文件，自动引用所需资源
          */
         new HtmlWebpackPlugin({
             template: path.join(pagePath, 'index.html'),
