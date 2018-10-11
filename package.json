@@ -11,7 +11,8 @@
     "build-dev": "webpack --config webpack.dev.js",
     "start": "webpack-dev-server --config webpack.dev.js",
     "watch": "webpack --watch",
-    "bs": "browser-sync start --server --port 8000 --ui-port 8001 --no-open --no-notify --files \"dist/*.*\""
+    "bs": "browser-sync start --server --port 8000 --ui-port 8001 --no-open --no-notify --files \"dist/*.*\"",
+    "cmder": "cmder %cd%"
   },
   "author": "BenYip",
   "license": "ISC",
